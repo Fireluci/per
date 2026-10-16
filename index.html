@@ -54,9 +54,10 @@ const BOTS = [
 // ============================================================================
 
 (function () {
-  const payload = new URLSearchParams(location.search).get("s") || "";
+  const params = new URLSearchParams(location.search);
+  const payload = params.get("s") || params.get("start") || "";
   // Payloads are URL-safe base64 only; anything else is rejected.
-  if (!/^[A-Za-z0-9_-]{4,512}$/.test(payload) || BOTS.length === 0) {
+  if (!/^[A-Za-z0-9_-]{1,64}$/.test(payload) || BOTS.length === 0) {
     document.getElementById("ok").style.display = "none";
     document.getElementById("bad").style.display = "block";
     return;
